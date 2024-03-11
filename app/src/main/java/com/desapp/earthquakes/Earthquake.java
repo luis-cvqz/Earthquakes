@@ -1,5 +1,7 @@
 package com.desapp.earthquakes;
 
+import java.util.Objects;
+
 public class Earthquake {
     private String id;
     private String place;
@@ -63,6 +65,19 @@ public class Earthquake {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Earthquake that = (Earthquake) o;
+        return Double.compare(magnitude, that.magnitude) == 0 && time == that.time && Double.compare(longitude, that.longitude) == 0 && Double.compare(latitude, that.latitude) == 0 && Objects.equals(id, that.id) && Objects.equals(place, that.place);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, place, magnitude, time, longitude, latitude);
     }
 }
 
