@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.desapp.api.EarthquakeJSONResponse;
+import com.desapp.api.Feature;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

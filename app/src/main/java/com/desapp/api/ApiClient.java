@@ -1,4 +1,4 @@
-package com.desapp.earthquakes;
+package com.desapp.api;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
