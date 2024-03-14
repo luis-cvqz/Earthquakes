@@ -14,10 +14,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class MainViewModel extends ViewModel {
     private final MutableLiveData<List<Earthquake>> eqList = new MutableLiveData<>();
 
@@ -25,21 +21,48 @@ public class MainViewModel extends ViewModel {
         return eqList;
     }
 
+    private MainRepository repository = new MainRepository();
+
+    public void getEarthquakes() {
+        repository.getEarthquakes(earthquakeList -> {
+            eqList.setValue(earthquakeList);
+        });
+    }
+
+    /*
     public void  getEarthquakes() {
         ApiClient.Service service = ApiClient.getInstance().getService();
 
-        service.getEarthquakes().enqueue(new Callback<String>() {
+        service.getEarthquakes().enqueue(new Callback<EarthquakeJSONResponse>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                List<Earthquake> eql = parseEarthquake(response.body());
+            public void onResponse(Call<EarthquakeJSONResponse> call, Response<EarthquakeJSONResponse> response) {
+                List<Earthquake> eql = getEarthquakesWithMosh(response.body());
                 eqList.setValue(eql);
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
+            public void onFailure(Call<EarthquakeJSONResponse> call, Throwable t) { }
         });
+    }*/
+
+    private List<Earthquake> getEarthquakesWithMoshi(EarthquakeJSONResponse body) {
+        ArrayList<Earthquake> eqList = new ArrayList<>();
+
+        List<Feature> features = body.getFeatures();
+        for (Feature feature: features) {
+            String id = feature.getId();
+            double magnitude = feature.getProperties().getMagnitude();
+            String place = feature.getProperties().getPlace();
+            long time = feature.getProperties().getTime();
+
+            double longitude = feature.getGeometry().getLongitude();
+            double latitude = feature.getGeometry().getLatitude();
+
+            Earthquake earthquake = new Earthquake(id, place, magnitude, time, latitude,longitude);
+            eqList.add(earthquake);
+        }
+
+        return eqList;
     }
 
     private List<Earthquake> parseEarthquake(String body) {
