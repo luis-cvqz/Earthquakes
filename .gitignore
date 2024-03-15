@@ -1,2 +1,8 @@
 # Project exclude paths
 /.gradle/
+
+# IDEA
+/.idea/deploymentTargetDropDown.xml
+/.idea/workspace.xml
+/.idea/compliler.xml
+
