@@ -1,13 +1,13 @@
 package com.desapp.earthquakes;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.desapp.Earthquake;
 import com.desapp.earthquakes.databinding.EqItemListBinding;
 
 public class EqAdapter extends ListAdapter<Earthquake, EqAdapter.EqViewHolder> {

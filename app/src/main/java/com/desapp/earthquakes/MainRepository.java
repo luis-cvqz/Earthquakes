@@ -2,9 +2,13 @@ package com.desapp.earthquakes;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
+import com.desapp.Earthquake;
 import com.desapp.api.ApiClient;
 import com.desapp.api.EarthquakeJSONResponse;
 import com.desapp.api.Feature;
+import com.desapp.database.EarthquakeDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +18,37 @@ import retrofit2.Response;
 
 
 public class MainRepository {
+    private final EarthquakeDatabase database;
+
+    public MainRepository(EarthquakeDatabase database) {
+        this.database = database;
+    }
+
     public interface  DownloadEqsListener {
         void onEqsDownloaded(List<Earthquake> eqList);
+    }
+
+    public LiveData<List<Earthquake>> getEqList() {
+        return database.earthquakeDAO().getEarthquakes();
+    }
+
+    public void downloadAndSaveEarthquakes() {
+        ApiClient.Service service = ApiClient.getInstance().getService();
+
+        service.getEarthquakes().enqueue(new Callback<EarthquakeJSONResponse>() {
+            @Override
+            public void onResponse(Call<EarthquakeJSONResponse> call, Response<EarthquakeJSONResponse> response) {
+                List<Earthquake> earthquakeList = getEarthquakesWithMoshi(response.body());
+                EarthquakeDatabase.databaseWriteExecutor.execute(() -> {
+                    database.earthquakeDAO().insertAll(earthquakeList);
+                });
+            }
+
+            @Override
+            public void onFailure(Call<EarthquakeJSONResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     private List<Earthquake> getEarthquakesWithMoshi(EarthquakeJSONResponse body) {

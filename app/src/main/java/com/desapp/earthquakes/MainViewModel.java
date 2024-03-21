@@ -1,11 +1,14 @@
 package com.desapp.earthquakes;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.desapp.api.EarthquakeJSONResponse;
-import com.desapp.api.Feature;
+import com.desapp.Earthquake;
+import com.desapp.database.EarthquakeDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,14 +17,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainViewModel extends ViewModel {
+public class MainViewModel extends AndroidViewModel {
+
+    private final MainRepository repository;
+
     private final MutableLiveData<List<Earthquake>> eqList = new MutableLiveData<>();
 
-    public LiveData<List<Earthquake>> getEqList() {
-        return eqList;
+    public MainViewModel(@NonNull Application application) {
+        super(application);
+        EarthquakeDatabase database = EarthquakeDatabase.getDatabase(application);
+        repository = new MainRepository(database);
     }
 
-    private MainRepository repository = new MainRepository();
+    public LiveData<List<Earthquake>> getEqList() {
+        return repository.getEqList();
+    }
+
+    public void downloadEarthquakes() {
+        repository.downloadAndSaveEarthquakes();
+    }
 
     public void getEarthquakes() {
         repository.getEarthquakes(earthquakeList -> {
@@ -44,26 +58,6 @@ public class MainViewModel extends ViewModel {
             public void onFailure(Call<EarthquakeJSONResponse> call, Throwable t) { }
         });
     }*/
-
-    private List<Earthquake> getEarthquakesWithMoshi(EarthquakeJSONResponse body) {
-        ArrayList<Earthquake> eqList = new ArrayList<>();
-
-        List<Feature> features = body.getFeatures();
-        for (Feature feature: features) {
-            String id = feature.getId();
-            double magnitude = feature.getProperties().getMagnitude();
-            String place = feature.getProperties().getPlace();
-            long time = feature.getProperties().getTime();
-
-            double longitude = feature.getGeometry().getLongitude();
-            double latitude = feature.getGeometry().getLatitude();
-
-            Earthquake earthquake = new Earthquake(id, place, magnitude, time, latitude,longitude);
-            eqList.add(earthquake);
-        }
-
-        return eqList;
-    }
 
     private List<Earthquake> parseEarthquake(String body) {
         ArrayList<Earthquake> eql = new ArrayList<>();
