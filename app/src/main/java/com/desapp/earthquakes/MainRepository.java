@@ -59,7 +59,7 @@ public class MainRepository {
             double longitude = feature.getGeometry().getLongitude();
             double latitude = feature.getGeometry().getLatitude();
 
-            Earthquake earthquake = new Earthquake(id, place, magnitude, time,latitude, longitude);
+            Earthquake earthquake = new Earthquake(id, place, magnitude, time, latitude, longitude);
 
             eqList.add(earthquake);
         }

@@ -17,7 +17,7 @@ public class Earthquake {
     private double longitude;
     private double latitude;
 
-    public Earthquake(String id, String place, double magnitude, long time, double longitude, double latitude) {
+    public Earthquake(@NonNull String id, String place, double magnitude, long time, double longitude, double latitude) {
         this.id = id;
         this.place = place;
         this.magnitude = magnitude;
@@ -26,11 +26,12 @@ public class Earthquake {
         this.latitude = latitude;
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
