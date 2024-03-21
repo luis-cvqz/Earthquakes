@@ -1,7 +1,5 @@
 package com.desapp.earthquakes;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 
 import com.desapp.Earthquake;
@@ -12,6 +10,7 @@ import com.desapp.database.EarthquakeDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,10 +21,6 @@ public class MainRepository {
 
     public MainRepository(EarthquakeDatabase database) {
         this.database = database;
-    }
-
-    public interface  DownloadEqsListener {
-        void onEqsDownloaded(List<Earthquake> eqList);
     }
 
     public LiveData<List<Earthquake>> getEqList() {
@@ -70,20 +65,5 @@ public class MainRepository {
         }
 
         return eqList;
-    }
-
-    public void getEarthquakes(DownloadEqsListener downloadEqsListener) {
-        ApiClient.Service service = ApiClient.getInstance().getService();
-        service.getEarthquakes().enqueue(new Callback<EarthquakeJSONResponse>() {
-            @Override
-            public void onResponse(Call<EarthquakeJSONResponse> call, Response<EarthquakeJSONResponse> response) {
-                Log.d("rep", response.body().toString());
-                List<Earthquake> earthquakeList = getEarthquakesWithMoshi(response.body());
-                downloadEqsListener.onEqsDownloaded(earthquakeList);
-            }
-
-            @Override
-            public void onFailure(Call<EarthquakeJSONResponse> call, Throwable t) { }
-        });
     }
 }
