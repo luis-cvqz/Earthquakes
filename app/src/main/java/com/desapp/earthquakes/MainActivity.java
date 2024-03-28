@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Toast;
 
+import com.desapp.Earthquake;
 import com.desapp.earthquakes.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
     ActivityMainBinding binding;
 
     @Override
@@ -25,9 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         EqAdapter adapter = new EqAdapter();
         adapter.setOnItemClickListener(earthquake ->
-                Toast.makeText(MainActivity.this,
-                        earthquake.getPlace(),
-                        Toast.LENGTH_SHORT).show());
+                openEqDetailActivity(earthquake));
         binding.eqRecycler.setAdapter(adapter);
 
         viewModel.downloadEarthquakes();
@@ -35,5 +35,14 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getEqList().observe(this, eqList -> {
             adapter.submitList(eqList);
         });
+    }
+
+    private void openEqDetailActivity(Earthquake earthquake) {
+
+        Intent intent = new Intent(this, DetailActivity.class);
+
+        intent.putExtra(DetailActivity.EARTHQUAKE_KEY, earthquake);
+
+        startActivity(intent);
     }
 }
