@@ -47,12 +47,20 @@ public class Earthquake {
         return magnitude;
     }
 
+    public String getStringMagnitude() {
+        return String.valueOf(magnitude);
+    }
+
     public void setMagnitude(double magnitude) {
         this.magnitude = magnitude;
     }
 
     public long getTime() {
         return time;
+    }
+
+    public String getStringTime() {
+        return String.valueOf(time);
     }
 
     public void setTime(long time) {
@@ -63,12 +71,20 @@ public class Earthquake {
         return longitude;
     }
 
+    public String getStringLongitude() {
+        return String.valueOf(longitude);
+    }
+
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     public double getLatitude() {
         return latitude;
+    }
+
+    public String getStringLatitude() {
+        return String.valueOf(latitude);
     }
 
     public void setLatitude(double latitude) {
