@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="earthquake"
+            type="com.desapp.Earthquake" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView android:id="@+id/detailsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:padding="10dp"
+                android:textSize="26sp"
+                android:text="@string/lbl_eqDetails"/>
+
+            <!-- TODO: Add MapView showing the place of the earthquake -->
+
+            <GridLayout android:id="@+id/details_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/detailsTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="10dp"
+                android:columnCount="2"
+                android:rowCount="6" >
+
+                <TextView android:id="@+id/idLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="0"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@string/lbl_id" />
+
+                <TextView android:id="@+id/id_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="0"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@{earthquake.id}"
+                    tools:text="nn00875181" />
+
+                <TextView android:id="@+id/placeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="1"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@string/lbl_place" />
+
+                <TextView android:id="@+id/place_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="1"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@{earthquake.place}"
+                    tools:text="Honolulu Hawaii" />
+
+                <TextView android:id="@+id/magnitudeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="2"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@string/lbl_magnitude"/>
+
+                <TextView android:id="@+id/magnitude_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="2"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@{earthquake.stringMagnitude}"
+                    tools:text="5.0" />
+
+                <TextView android:id="@+id/longitudeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="3"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@string/lbl_longitude"/>
+
+                <TextView android:id="@+id/longitude_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="3"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@{earthquake.stringLongitude}"
+                    tools:text="-122.8304977"/>
+
+                <TextView android:id="@+id/latitudeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="4"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@string/lbl_latitude" />
+
+                <TextView android:id="@+id/latitude_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="4"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@{earthquake.stringLatitude}"
+                    tools:text="17.1943501"/>
+
+                <TextView android:id="@+id/timeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="5"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@string/lbl_time" />
+
+                <TextView android:id="@+id/time_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="5"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@{earthquake.stringTime}"
+                    tools:text="1711584344210"/>
+            </GridLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
