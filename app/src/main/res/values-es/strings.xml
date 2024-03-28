@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Terremotos</string>
+    <string name="lbl_eqDetails">Información de terremoto</string>
+    <string name="lbl_place">Lugar:</string>
+    <string name="lbl_magnitude">Magnitud:</string>
+    <string name="lbl_longitude">Longitud:</string>
+    <string name="lbl_latitude">Latitud:</string>
+    <string name="lbl_time">Hora:</string>
+</resources>
