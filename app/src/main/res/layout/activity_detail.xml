@@ -96,30 +96,11 @@
                     android:text="@{earthquake.stringMagnitude}"
                     tools:text="5.0" />
 
-                <TextView android:id="@+id/longitudeLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_row="3"
-                    android:padding="10dp"
-                    android:textSize="20sp"
-                    android:text="@string/lbl_longitude"/>
-
-                <TextView android:id="@+id/longitude_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:layout_row="3"
-                    android:padding="10dp"
-                    android:textSize="20sp"
-                    android:text="@{earthquake.stringLongitude}"
-                    tools:text="-122.8304977"/>
-
                 <TextView android:id="@+id/latitudeLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="0"
-                    android:layout_row="4"
+                    android:layout_row="3"
                     android:padding="10dp"
                     android:textSize="20sp"
                     android:text="@string/lbl_latitude" />
@@ -128,11 +109,30 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
-                    android:layout_row="4"
+                    android:layout_row="3"
                     android:padding="10dp"
                     android:textSize="20sp"
                     android:text="@{earthquake.stringLatitude}"
                     tools:text="17.1943501"/>
+
+                <TextView android:id="@+id/longitudeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:layout_row="4"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@string/lbl_longitude"/>
+
+                <TextView android:id="@+id/longitude_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_row="4"
+                    android:padding="10dp"
+                    android:textSize="20sp"
+                    android:text="@{earthquake.stringLongitude}"
+                    tools:text="-122.8304977"/>
 
                 <TextView android:id="@+id/timeLabel"
                     android:layout_width="wrap_content"
