@@ -5,4 +5,8 @@
 /.idea/deploymentTargetDropDown.xml
 /.idea/workspace.xml
 /.idea/compliler.xml
+/.idea/shelf/
+
+# APIUp
+/app/src/main/res/values/google_map_key.xml
 
