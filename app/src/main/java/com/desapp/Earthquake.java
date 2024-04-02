@@ -17,16 +17,16 @@ public class Earthquake implements Parcelable {
     private String place;
     private double magnitude;
     private long time;
-    private double longitude;
     private double latitude;
+    private double longitude;
 
-    public Earthquake(@NonNull String id, String place, double magnitude, long time, double longitude, double latitude) {
+    public Earthquake(@NonNull String id, String place, double magnitude, long time, double latitude, double longitude) {
         this.id = id;
         this.place = place;
         this.magnitude = magnitude;
         this.time = time;
-        this.longitude = longitude;
         this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     protected Earthquake(Parcel in) {
