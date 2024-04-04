@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.View;
 import android.widget.Toast;
 
 import com.desapp.Earthquake;
+import com.desapp.api.RequestStatus;
 import com.desapp.earthquakes.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.eqRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        EqAdapter adapter = new EqAdapter();
+        EqAdapter adapter = new EqAdapter(this);
         adapter.setOnItemClickListener(earthquake ->
                 openEqDetailActivity(earthquake));
         binding.eqRecycler.setAdapter(adapter);
@@ -34,6 +36,17 @@ public class MainActivity extends AppCompatActivity {
 
         viewModel.getEqList().observe(this, eqList -> {
             adapter.submitList(eqList);
+        });
+
+        viewModel.getStatusMutableLiveData().observe(this, status -> {
+            if (status.getStatus() == RequestStatus.LOADING) {
+                binding.loadingWheel.setVisibility(View.VISIBLE);
+            } else {
+                binding.loadingWheel.setVisibility(View.GONE);
+            }
+            if (status.getStatus() == RequestStatus.ERROR) {
+                Toast.makeText(this, "Check Intenrnet Connection", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 

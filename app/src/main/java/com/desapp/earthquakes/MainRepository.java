@@ -27,7 +27,7 @@ public class MainRepository {
         return database.earthquakeDAO().getEarthquakes();
     }
 
-    public void downloadAndSaveEarthquakes() {
+    public void downloadAndSaveEarthquakes(DownloadStatusListener downloadStatusListener) {
         ApiClient.Service service = ApiClient.getInstance().getService();
 
         service.getEarthquakes().enqueue(new Callback<EarthquakeJSONResponse>() {
@@ -37,11 +37,12 @@ public class MainRepository {
                 EarthquakeDatabase.databaseWriteExecutor.execute(() -> {
                     database.earthquakeDAO().insertAll(earthquakeList);
                 });
+                downloadStatusListener.downloadSuccess();
             }
 
             @Override
             public void onFailure(Call<EarthquakeJSONResponse> call, Throwable t) {
-
+                downloadStatusListener.downloadError(t.getMessage());
             }
         });
     }
@@ -65,5 +66,10 @@ public class MainRepository {
         }
 
         return eqList;
+    }
+
+    public interface DownloadStatusListener {
+        void downloadSuccess();
+        void downloadError(String message);
     }
 }
