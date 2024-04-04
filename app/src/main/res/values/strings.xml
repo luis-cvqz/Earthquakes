@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Earthquakes</string>
     <string name="lbl_id" translatable="false">ID:</string>
     <string name="lbl_eqDetails">Earthquake details</string>
@@ -7,4 +7,5 @@
     <string name="lbl_longitude">Longitude:</string>
     <string name="lbl_latitude">Latitude:</string>
     <string name="lbl_time">Time:</string>
+    <string name="magnitude_format" translatable="false" tools:ignore="ExtraTranslation">%.2f</string>
 </resources>
