@@ -27,6 +27,18 @@ public class MainRepository {
         return database.earthquakeDAO().getEarthquakes();
     }
 
+    ApiClient.Service service = ApiClient.getInstance().getService();
+
+    public void  createEarthquake(Earthquake earthquake, Callback<EarthquakeJSONResponse> callback) {
+        Call<EarthquakeJSONResponse> call = service.createEathquake(earthquake);
+        call.enqueue(callback);
+    }
+
+    public void updateEarthquakes(int id, Earthquake earthquake, Callback<EarthquakeJSONResponse> callback) {
+        Call<EarthquakeJSONResponse> call = service.updateEarthquake(id, earthquake);
+        call.enqueue(callback);
+    }
+
     public void downloadAndSaveEarthquakes(DownloadStatusListener downloadStatusListener) {
         ApiClient.Service service = ApiClient.getInstance().getService();
 
